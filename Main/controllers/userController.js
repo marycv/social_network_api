@@ -5,29 +5,16 @@ module.exports = {
   // GET all users
   getUsers(req, res) {
     User.find()
-      .then(async (users) => {
-        const userObj = {
-          users,
-        };
-        return res.json(userObj);
-      })
-      .catch((err) => {
-        console.log(err);
-        return res.status(500).json(err);
-      });
+      .then((users) => res.json(users))
+      .catch((err) => res.status(500).json(err));
   },
   // GET a single user by its _id and populated thought and friend data
   getSingleUser(req, res) {
     User.findOne({ _id: req.params.userId })
-    .populate('thoughts')
-    .populate('friends')
-    .then(async (user) => {
-      return res.json(user)
-    })
-    .catch((err) => {
-      console.log(err);
-      return res.status(500).json(err);
-    });
+      .populate('thoughts')
+      .populate('friends')
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
   },
   // POST a new user
   createUser(req, res) {
@@ -45,12 +32,15 @@ module.exports = {
       .then((user) => res.json(user))
       .catch((err) => res.status(500).json(err));
   },
-  // DELETE user by its _id
+  // DELETE user by its _id and remove the user's associated thoughts
   deleteUser(req, res) {
-    User.findOneAndRemove(
-      {_id: req.params.userId}
+    User.findOneAndDelete({ _id: req.params.userId })
+      .then((user) => 
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : Thought.deleteMany({ _id: { $in: User.thoughts } })
     )
-    .then((user) => res.json('User has been deleted'))
+    .then(() => res.json({ Message: 'User and associated thoughts deleted' }))
     .catch((err) => res.status(500).json(err));
-  }
-}
+  },
+};

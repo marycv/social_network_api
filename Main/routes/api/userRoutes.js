@@ -16,6 +16,7 @@ router
     .post(createUser)
     // remove a user's associated thoughts when deleted
 
+// /api/users/:userId
 router
   .route('/:userId')
   .get(getSingleUser)
