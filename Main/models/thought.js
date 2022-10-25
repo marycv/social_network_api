@@ -1,9 +1,7 @@
 const { Schema, model } = require('mongoose');
 const reactionSchema = require('./reaction');
-// import function from timestamp.js
+const dateFormat = require('../utils/dateFormat');
 
-
-// Create 'thoughtSchema'
 const thoughtSchema = new Schema({
     thoughtText: {
         type: String,
@@ -14,8 +12,7 @@ const thoughtSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now,
-        // Use a getter method to format the timestamp on query
-        // Function will be created in 
+        get: (timestamp) => dateFormat(timestamp),
     },
     username : {
         type: String,
@@ -24,7 +21,10 @@ const thoughtSchema = new Schema({
     reactions: [reactionSchema],
 });
 
-// Create a virtual called 'reactionCount' taht retrieves the length of the thought's reactions array field on query
+// Create a virtual called 'reactionCount' that retrieves the length of the thought's reactions array field on query
+thoughtSchema.virtual('reactionCount').get(function () {
+    return this.reactions.length;
+});
 
 const Thought = model('Thought', thoughtSchema);
 
