@@ -16,9 +16,9 @@ This project is an API build for a social network web application using Express.
 ## Usage
 A user is able to create a friend list, share their thoughts, and react to friends' thoughts.
 ## Preview
-[User Routes](https://drive.google.com/file/d/1tAZJhqxig3NinNTDl5aSpLnbw6sgJxjm/view)
-[User Friends Routes](https://drive.google.com/file/d/1VX2vftcMbyAe_MF2r5V5nsvf2cDjNXbk/view)
-[Thought Routes](https://drive.google.com/file/d/16vfcmwbXMaYZj_zUBpjfSzT7ZMaMHp3O/view)
+[User Routes](https://drive.google.com/file/d/1tAZJhqxig3NinNTDl5aSpLnbw6sgJxjm/view) <br>
+[User Friends Routes](https://drive.google.com/file/d/1VX2vftcMbyAe_MF2r5V5nsvf2cDjNXbk/view) <br>
+[Thought Routes](https://drive.google.com/file/d/16vfcmwbXMaYZj_zUBpjfSzT7ZMaMHp3O/view) <br>
 [Reactions Routes](https://drive.google.com/file/d/1f0SPqiesd_JJftd99ZskAKeavD9FZCn9/view)
 ## Installation
 npm i
